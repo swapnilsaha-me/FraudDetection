@@ -22,6 +22,15 @@ export default function App() {
   const [result, setResult] = useState(null);     // last prediction
   const [highlightId, setHighlightId] = useState(null);
   const [error, setError] = useState("");
+  const [theme, setTheme] = useState(
+    () => document.documentElement.dataset.theme === "dark" ? "dark" : "light"
+  );
+
+  // Apply the theme to <html> and remember the choice.
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try { localStorage.setItem("theme", theme); } catch { /* storage unavailable */ }
+  }, [theme]);
 
   // Load dropdown options and the user list once on start-up.
   useEffect(() => {
@@ -71,6 +80,14 @@ export default function App() {
       <header className="topbar">
         <h1>🛡️ Transaction Fraud Detection</h1>
         <span className="subtitle">Machine-learning powered · runs on localhost</span>
+        <button
+          type="button"
+          className="theme-toggle"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+        >
+          {theme === "dark" ? "☀️ Light" : "🌙 Night"}
+        </button>
       </header>
 
       <main className="layout">
