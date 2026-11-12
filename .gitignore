@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated files (recreated automatically on first run)
+backend/data/
+backend/model/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Frontend (React + Vite)
+frontend/node_modules/
+frontend/dist/
